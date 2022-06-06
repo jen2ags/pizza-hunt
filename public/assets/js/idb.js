@@ -1,7 +1,7 @@
 //create variable to hold db connection
 let db;
 //establish a connection to IndexedDB database called 'pizza_hunt' and set it to version 1
-const request = indexDB.open('pizza_hunt', 1);
+const request = indexedDB.open('pizza_hunt', 1);
 
 //this event will emit if the database version changes (nonexistant to version 1, v1 to v2, etc.)
 request.onupgradeneeded = function(event) {
@@ -25,7 +25,7 @@ request.onsuccess = function(event) {
 
 request.onerror = function(event) {
     //log error here
-    console.log(event.target.errCode);
+    console.log(event.target.errorCode);
 };
 
 //This function will be executed if we attempt to submit a new pizza and there's no internet connection
@@ -57,7 +57,7 @@ function uploadPizza() {
             fetch('/api/pizzas', {
                 method: 'POST',
                 body: JSON.stringify(getAll.result),
-                Headers: {
+                headers: {
                     Accept: 'application/json, text/plain, */*',
                     'Content-Type': 'application/json'
                 }
